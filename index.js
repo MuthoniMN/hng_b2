@@ -14,6 +14,10 @@ const getProperties = (number) => {
     props.push('odd')
   }
 
+  if(number < 0){
+    return props;
+  }
+
   const splitNumbers = number.toString().split('').map(n => Number(n));
 
   splitNumbers.forEach(element => {
@@ -31,6 +35,9 @@ const getProperties = (number) => {
 
 const isPerfect = (number) => {
   let sum = 1;
+  if(number < 0){
+    return false;
+  }
   for (let i = 2; i <= Math.sqrt(number); i++) {
       if (number % i === 0) {
           sum += i;
@@ -45,6 +52,9 @@ const isPerfect = (number) => {
 
 const isPrime = (number) => {
   let prime = true;
+  if(number < 0){
+    return false;
+  }
 
   for (let i = 2; i <= number/2; i++) {
     if (number % i == 0) {
@@ -75,7 +85,6 @@ app.get('/api/classify-number', async (req, res, next) => {
 
     const response = await fetch(`http://numbersapi.com/${number}/math?json`);
     const fact = await response.json();
-    console.log(getProperties(Number(number)));
 
     return res.json({
       'number': Number(number),
