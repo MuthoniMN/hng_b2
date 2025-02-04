@@ -74,12 +74,10 @@ app.get('/api/classify-number', async (req, res, next) => {
   try {
     let { number } = req.query;
     number = number ? number.replaceAll(',', '') : number;
-    
-    console.log(Number(number));
 
     if(!number || !Number(number) || Number(number) != Math.trunc(Number(number)) || number.includes('.')){
       return res.json({
-        'number': "alphabet",
+        'number': number,
         'error': true
       }).status(400);
     }
