@@ -73,7 +73,7 @@ const digitSum = (number) => {
 app.get('/api/classify-number', async (req, res, next) => {
   try {
     let { number } = req.query;
-    number = number.replaceAll(',', '');
+    number = number ? number.replaceAll(',', '') : number;
     
     console.log(Number(number));
 
