@@ -8,26 +8,24 @@ const getProperties = (number) => {
   const props = [];
   let sum = 0
 
+  if(number > 0){
+    const splitNumbers = number.toString().split('').map(n => Number(n));
+
+    splitNumbers.forEach(element => {
+      const cube = element **3;
+
+      sum += cube
+    });
+
+    if(sum === number){
+      props.push('armstrong')
+    }  
+  }
+
   if (number % 2 === 0){
     props.push('even');
   }else {
     props.push('odd')
-  }
-
-  if(number < 0){
-    return props;
-  }
-
-  const splitNumbers = number.toString().split('').map(n => Number(n));
-
-  splitNumbers.forEach(element => {
-    const cube = element **3;
-
-    sum += cube
-  });
-
-  if(sum === number){
-    props.push('armstrong')
   }
 
   return props;
