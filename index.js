@@ -66,9 +66,19 @@ app.get('/api/classify-number', async (req, res, next) => {
   try {
     const { number } = req.query;
 
-    if(!Number(number)){
+    if(!number){
+      return res.json({
+        'number': null,
+        'error': true
+      });
+    }else if(!Number(number)){
       return res.json({
         'number': 'alphabet',
+        'error': true
+      }).status(400);
+    }else if(Number(number) != Math.trunc(Number(number))){
+      return res.json({
+        'number': 'float',
         'error': true
       }).status(400);
     }
