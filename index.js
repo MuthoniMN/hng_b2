@@ -13,7 +13,6 @@ const getProperties = (number) => {
 
     splitNumbers.forEach(element => {
       const cube = element **splitNumbers.length;
-      console.log(cube);
 
       sum += cube
     });
@@ -73,7 +72,10 @@ const digitSum = (number) => {
 
 app.get('/api/classify-number', async (req, res, next) => {
   try {
-    const { number } = req.query;
+    let { number } = req.query;
+    number = number.replaceAll(',', '');
+    
+    console.log(Number(number));
 
     if(!number || !Number(number) || Number(number) != Math.trunc(Number(number)) || number.includes('.')){
       return res.json({
