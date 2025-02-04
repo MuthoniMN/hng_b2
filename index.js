@@ -73,7 +73,7 @@ app.get('/api/classify-number', async (req, res, next) => {
       }).status(400);
     }
 
-    const response = await fetch(`http://numbersapi.com/${number}?json`);
+    const response = await fetch(`http://numbersapi.com/${number}/math?json`);
     const fact = await response.json();
     console.log(getProperties(Number(number)));
 
