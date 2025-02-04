@@ -69,14 +69,14 @@ const isPrime = (number) => {
 const digitSum = (number) => {
   const sum = Math.abs(number).toString().split('').map(n => Number(n)).reduce((acc, curr) => acc + curr, 0);
 
-  return number < 0 ? -sum : sum;
+  return sum;
 }
 
 app.get('/api/classify-number', async (req, res, next) => {
   try {
     const { number } = req.query;
 
-    if(!number || !Number(number) || Number(number) != Math.trunc(Number(number))){
+    if(!number || !Number(number) || Number(number) != Math.trunc(Number(number)) || number < 0){
       return res.json({
         'number': 'alphabet',
         'error': true
