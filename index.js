@@ -67,7 +67,7 @@ const isPrime = (number) => {
 const digitSum = (number) => {
   const sum = Math.abs(number).toString().split('').map(n => Number(n)).reduce((acc, curr) => acc + curr, 0);
 
-  return sum;
+  return number < 0 ? -sum : sum;
 }
 
 app.get('/api/classify-number', async (req, res, next) => {
