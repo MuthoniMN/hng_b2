@@ -33,7 +33,7 @@ const getProperties = (number) => {
 
 const isPerfect = (number) => {
   let sum = 1;
-  if(number < 0){
+  if(number <= 0){
     return false;
   }
   for (let i = 2; i <= Math.sqrt(number); i++) {
@@ -50,7 +50,7 @@ const isPerfect = (number) => {
 
 const isPrime = (number) => {
   let prime = true;
-  if(number < 0){
+  if(number <= 0){
     return false;
   }
 
@@ -65,6 +65,7 @@ const isPrime = (number) => {
 }
 
 const digitSum = (number) => {
+  if(number === 0){ return 0; }
   const sum = Math.abs(number).toString().split('').map(n => Number(n)).reduce((acc, curr) => acc + curr, 0);
 
   return number < 0 ? -sum : sum;
@@ -77,7 +78,7 @@ app.get('/api/classify-number', async (req, res, next) => {
     
     console.log(Number(number));
 
-    if(!number || !Number(number) || Number(number) != Math.trunc(Number(number)) || number.includes('.')){
+    if((!number && number != 0) || (!Number(number) && number != 0) || Number(number) != Math.trunc(Number(number)) || number.includes('.')){
       return res.json({
         'number': "alphabet",
         'error': true
