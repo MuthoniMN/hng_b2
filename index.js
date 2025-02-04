@@ -12,7 +12,8 @@ const getProperties = (number) => {
     const splitNumbers = number.toString().split('').map(n => Number(n));
 
     splitNumbers.forEach(element => {
-      const cube = element **3;
+      const cube = element **splitNumbers.length;
+      console.log(cube);
 
       sum += cube
     });
