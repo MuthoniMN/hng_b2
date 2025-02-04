@@ -74,7 +74,7 @@ app.get('/api/classify-number', async (req, res, next) => {
   try {
     const { number } = req.query;
 
-    if(!number || !Number(number) || Number(number) != Math.trunc(Number(number))){
+    if(!number || !Number(number) || Number(number) != Math.trunc(Number(number)) || number.includes('.')){
       return res.json({
         'number': Number(number) ? `${Number(number)}` : number || "undefined",
         'error': true
