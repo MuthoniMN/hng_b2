@@ -89,7 +89,7 @@ app.get('/api/classify-number', async (req, res, next) => {
       'is_prime': isPrime(Number(number)),
       'is_perfect': isPerfect(Number(number)),
       'properties': getProperties(Number(number)),
-      'digits_sum': digitSum(Number(number)),
+      'digit_sum': digitSum(Number(number)),
       'fun_fact': fact.text
     }).status(200);
     }catch(e){
