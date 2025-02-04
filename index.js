@@ -1,5 +1,8 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 
 const getProperties = (number) => {
   const props = [];
@@ -54,33 +57,45 @@ const isPrime = (number) => {
 }
 
 const digitSum = (number) => {
-  const sum = Math.absolute(number).toString().split('').map(n => Number(n)).reduce((acc, curr) => acc + curr, 0);
+  const sum = Math.abs(number).toString().split('').map(n => Number(n)).reduce((acc, curr) => acc + curr, 0);
 
   return sum;
 }
 
-app.get('/api/classify-number', async (req, res) => {
-  const { number } = req.query;
+app.get('/api/classify-number', async (req, res, next) => {
+  try {
+    const { number } = req.query;
 
-  if(!Number(number)){
+    if(!Number(number)){
+      return res.json({
+        'number': 'alphabet',
+        'error': true
+      }).status(400);
+    }
+
+    const response = await fetch(`http://numbersapi.com/${number}?json`);
+    const fact = await response.json();
+    console.log(getProperties(Number(number)));
+
     return res.json({
-      'number': 'alphabet',
-      'error': true
-    }).status(400);
-  }
+      'number': Number(number),
+      'is_prime': isPrime(Number(number)),
+      'is_perfect': isPerfect(Number(number)),
+      'properties': getProperties(Number(number)),
+      'fun_fact': fact.text,
+      'digits_sum': digitSum(Number(number))
+    }).status(200);
+    }catch(e){
+      console.log(e);
+      next(e);
+    }
+});
 
-  const response = await fetch(`http://numbersapi.com/${number}?json`);
-  const fact = await response.json();
-  console.log(getProperties(Number(number)));
-
+app.use((err, req, res, next) => {
   return res.json({
-    'number': Number(number),
-    'is_prime': isPrime(Number(number)),
-    'is_perfect': isPerfect(Number(number)),
-    'properties': getProperties(Number(number)),
-    'fun_fact': fact.text,
-    'digits_sum': digitSum(Number(number))
-  }).status(200);
+    'error': true,
+    'message': "Internal Server Error!"
+  }).status(500);
 });
 
 app.listen(5000, () => console.log("Server is running!"));
