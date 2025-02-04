@@ -1,0 +1,24 @@
+{
+  "name": "hng_b2",
+  "version": "1.0.0",
+  "description": "Stage 2 Backend Task for HNG 12",
+  "homepage": "https://github.com/MuthoniMN/hng_b2#readme",
+  "bugs": {
+    "url": "https://github.com/MuthoniMN/hng_b2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuthoniMN/hng_b2.git"
+  },
+  "license": "ISC",
+  "author": "Michelle Ndiangui",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
