@@ -76,7 +76,7 @@ app.get('/api/classify-number', async (req, res, next) => {
 
     if(!number || !Number(number) || Number(number) != Math.trunc(Number(number))){
       return res.json({
-        'number': 'alphabet',
+        'number': Number(number) ? `${Number(number)}` : number || "undefined",
         'error': true
       }).status(400);
     }
@@ -89,8 +89,8 @@ app.get('/api/classify-number', async (req, res, next) => {
       'is_prime': isPrime(Number(number)),
       'is_perfect': isPerfect(Number(number)),
       'properties': getProperties(Number(number)),
-      'fun_fact': fact.text,
-      'digits_sum': digitSum(Number(number))
+      'digits_sum': digitSum(Number(number)),
+      'fun_fact': fact.text
     }).status(200);
     }catch(e){
       console.log(e);
